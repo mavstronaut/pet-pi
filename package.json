@@ -2,6 +2,7 @@
   "name": "pet-pi",
   "version": "1.0.0",
   "description": "Pet monitoring and automated training system.",
+  "homepage": "https://pet-pi.herokuapp.com/",
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
@@ -24,7 +25,6 @@
   "bugs": {
     "url": "https://github.com/mavstronaut/pet-pi/issues"
   },
-  "homepage": "https://github.com/mavstronaut/pet-pi#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
     "dotenv": "^8.1.0",
