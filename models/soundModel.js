@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 const Schema =  mongoose.Schema; 
 
 const audioSchema = new Schema({
-    title: {type: String , required: true},
+    title: {type: String, required: true},
+    type: {type: String, required: true},
     link: {type: String, required: false}
 }); 
 

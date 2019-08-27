@@ -1,6 +1,6 @@
 import React from "react";
 
-function NewSound() {
+function TestSound() {
     return (
         <div className="container mt-3 text-center">
             <div className="jumbotron jumbotron-fluid bg-info">
@@ -11,4 +11,4 @@ function NewSound() {
     )
 }
 
-export default NewSound;
+export default TestSound;

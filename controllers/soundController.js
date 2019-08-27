@@ -17,6 +17,7 @@ module.exports = {
         .create({
             title: req.body.title,
             link: req.body.link,
+            type: req.body.type,
             key: req.body.key
         })
         .then(res.end())
