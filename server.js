@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === "production") {
 
 app.use(routes);
 
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/googleBooks";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/pet-pi";
 
 
 async function mongoConnect(MONGODB_URI) {
