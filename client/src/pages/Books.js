@@ -59,6 +59,31 @@ class Books extends Component {
     }
 
     handleSave = event => {
+        // saveSound needs to come from the form that was submitted from SearchCard
+        const saveSound = this.state.form;
+        console.log(saveSound);
+
+        const soundData = {
+            title: saveSound.title,
+            link: saveSound.Link,
+            type: saveSound.type,
+            key: saveSound.id
+        }
+
+        
+        API.saveSound(soundData)
+            .then(API.getSavedSounds()
+                .then(res => {
+                    this.setState({
+                        savedSounds: res.data
+                    })
+                    console.log("In state", this.state.savedSounds)
+                    console.log("Length", this.state.savedSounds.length)
+                })
+            )
+    }
+
+    handleSearchSave = event => {
         const soundIndex = event.target.attributes.getNamedItem("data-index").value;
         const saveSound = this.state.results[soundIndex];
         console.log(saveSound);
@@ -67,10 +92,10 @@ class Books extends Component {
             title: saveSound.volumeInfo.title,
             link: saveSound.volumeInfo.previewLink,
             thumbnail: saveSound.volumeInfo.imageLinks.thumbnail,
-            author: saveSound.volumeInfo.authors[0],
-            description: saveSound.volumeInfo.description,
+            type: saveSound.type,
             key: saveSound.id
         }
+
 
         API.saveSound(soundData.key, soundData)
             .then(API.getSavedSounds()
@@ -94,6 +119,11 @@ class Books extends Component {
             window.location.reload()
         )
         
+    }
+
+    handlePlay = event => {
+        // create on click event
+        API.playSound(clicked)
     }
 
 
