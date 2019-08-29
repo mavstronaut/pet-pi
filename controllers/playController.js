@@ -3,6 +3,7 @@ const ytapi = require('simple-youtube-api');
 const {parse} = require('url');
 const youtube = new ytapi(process.env.YOUTUBE_KEY) || new ytapi(YOUTUBE_KEY);
 const db = require("../models")
+const yt = require("ytdl-core");
 
 
 // message, args
@@ -36,6 +37,8 @@ module.exports = {
       var id = songTitle.link;
       console.log(id);
 
+      var activeUser = db.Users.email;
+
       // let id = (() => {
       //   const parsed = parse(song, true);
       //   if (/^(www\.)?youtube\.com/.test(parsed.hostname)) {
@@ -53,9 +56,10 @@ module.exports = {
       // }
     
       
-      if (user === "mavbarona@gmail.com") {
+      if (activeUser === "mavbarona@gmail.com") {
         // plays song
-        const dispatcher = yt(songTitle.link)
+        const dispatcher = yt(songTitle.link);
+        yt(songTitle.link);
         // const dispatcher = message.guild.voiceConnection.playStream(yt(nextSong.url, {
         //   quality: 'lowest',
         //   filter: 'audioonly'
@@ -66,9 +70,9 @@ module.exports = {
             // message.channel.sendMessage('End of the queue, add more songs!');
             // message.guild.voiceConnection.disconnect();
             // message.client.queues.delete(message.guild.id);
-          }
-        );
+          });
       } else {
+        console.log("user doesn't have permission to play sound");
         // embed
         //   .setTitle(`**${info.title}** (${minutes}:${seconds}) has been added to the queue`)
         //   .setColor(0xDD2825)
@@ -82,7 +86,7 @@ module.exports = {
         //   }).catch(console.error);
         // } else {
         //   message.channel.sendMessage(`**${info.title}** (${minutes}:${seconds}) has been added to the queue`);
-        }
+        
       }
     }
   };

@@ -1,13 +1,12 @@
-// This will hold the model for the sounds in the mongoose database 
+// This will hold the model for the users in the mongoose database 
 const mongoose = require("mongoose"); 
 const Schema =  mongoose.Schema; 
 
-// const soundSchema = new Schema({
-//     title: {type: String , required: true},
-//     type: {type: String, required: true},
-//     link: {type: String, required: false}, 
-// }); 
+const userSchema = new Schema({
+    email: {type: String, required: true},
+    password: {type: String, require: true}
+}); 
 
-// const SavedSounds = mongoose.model("SavedSounds", soundSchema); 
+const User = mongoose.model("Users", userSchema); 
 
 module.exports = User; 
