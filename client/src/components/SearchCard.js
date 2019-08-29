@@ -10,8 +10,14 @@ function SearchCard(props) {
                         <div className="form-group">
                             <label >Sound</label>
                             <input type="text" className="form-control" value={props.value} onChange={props.onChange} placeholder="Example: http://youtube.com/?= Youtube Link" required/>
+                        
+                            <select class="form-control" id="sound-type">
+                                <option value="alert">Alert</option>
+                                <option value="distract">Distract</option>
+                                <option value="good">Good Boy</option>
+                            </select>
                         </div>
-                        <button className="btn btn-sm float-right btn-info" type="submit" >Search</button>
+    <button className="btn btn-sm float-right btn-info" type="submit" >Save</button>  {/* Previously was the search button */}
                     </form>
                 </div>
             </div>
