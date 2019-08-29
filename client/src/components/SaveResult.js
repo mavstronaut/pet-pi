@@ -1,5 +1,7 @@
 import React from "react"; 
 
+// this displays the sounds available to play
+
 function SavedResult({children}) {  
     return (
       <div className="container mt-3">
