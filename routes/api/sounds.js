@@ -14,8 +14,8 @@ router.route("/delete/:id")
 	  .delete(soundsController.remove);
 	  
 // play the song
-/* router.route("/saved")
-	.post(playController.song);
-	*/
+ router.route("/saved")
+	.post(playController.playSong);
+	
 
 module.exports = router;
