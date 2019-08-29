@@ -1,3 +1,4 @@
 module.exports = {
-    SavedBooks: require("./SavedSounds")
+    SavedBooks: require("./SavedSounds"),
+    Users: require("./user")
   };
