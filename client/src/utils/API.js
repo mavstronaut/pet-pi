@@ -19,4 +19,9 @@ export default {
   saveSound: function(soundKey, soundData) {
     return axios.post("/api/sounds/" + soundKey, soundData);
   }
+
+  // play sound, send link from the button click to the controllers/play.js
+  /* playSound: function(soundLink) {
+    return axios.post("/api/play/" + soundLink);
+  } */
 };

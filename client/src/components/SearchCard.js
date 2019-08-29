@@ -17,7 +17,7 @@ function SearchCard(props) {
                                 <option value="good">Good Boy</option>
                             </select>
                         </div>
-    <button className="btn btn-sm float-right btn-info" type="submit" >Save</button>  {/* Previously was the search button */}
+                        <button className="btn btn-sm float-right btn-info" type="submit" >Save</button>  {/* Previously was the search button */}
                     </form>
                 </div>
             </div>

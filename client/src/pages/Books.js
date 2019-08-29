@@ -1,9 +1,15 @@
 import React, { Component } from "react";
-import SearchCard from "../components/SearchCard";
-import SearchResult from "../components/SearchResult";
-import BookItemCard from "../components/BookItemCard";
+import SearchCard from "../components/SearchCard"; /* this component is used for the save form */
+import SearchResult from "../components/SearchResult"; 
+import BookItemCard from "../components/BookItemCard"; /* this component is used for the sound cards */
 import SaveCard from "../components/SaveResult";
 import API from "../utils/API";
+
+// this is for login
+import Login from "../components/LoginCard";
+
+// this is for youtube
+
 
 
 class Books extends Component {
