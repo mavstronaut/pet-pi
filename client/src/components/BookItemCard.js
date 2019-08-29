@@ -1,6 +1,6 @@
 import React from "react"; 
 
-function SoundItemCard(props) { 
+function BookItemCard(props) { 
 
     return (
       
@@ -8,7 +8,6 @@ function SoundItemCard(props) {
                 
             <div className="row no-gutters">
                 <div className="col">
-                    {/* Add link to new images */}
                 <img src={props.thumbnail} className="card-img" alt={props.title} style={{width: "200px"}}/>
                 </div>
                 <div className="col-md-8">
@@ -31,4 +30,4 @@ function SoundItemCard(props) {
     );
 }
 
-export default  SoundItemCard; 
+export default  BookItemCard; 

@@ -1,15 +1,15 @@
 const router = require("express").Router();
-const soundController = require("../../controllers/soundController");
+const booksController = require("../../controllers/bookscontroller");
 
 // Landing page call
 router.route("/:id")
-	.post(soundController.create);
+	.post(booksController.create);
 
 // Saved page calls
 router.route("/saved")
-  	.get(soundController.findAllSaved);
+  	.get(booksController.findAllSaved);
 
 router.route("/delete/:id")
-  	.delete(soundController.remove);
+  	.delete(booksController.remove);
 
 module.exports = router;

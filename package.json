@@ -1,8 +1,7 @@
 {
   "name": "pet-pi",
   "version": "1.0.0",
-  "description": "Pet monitoring and automated training system.",
-  "homepage": "https://pet-pi.herokuapp.com/",
+  "description": "",
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
@@ -13,29 +12,17 @@
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mavstronaut/pet-pi.git"
-  },
-  "keywords": [
-    "raspberry-pi"
-  ],
   "author": "mavstronaut",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mavstronaut/pet-pi/issues"
+  "devDependencies": {
+    "concurrently": "^4.1.0",
+    "nodemon": "^1.18.7"
   },
   "dependencies": {
-    "body-parser": "^1.19.0",
     "dotenv": "^8.1.0",
-    "express": "^4.17.1",
+    "express": "^4.16.3",
     "if-env": "^1.0.4",
-    "lodash": "^4.17.15",
-    "mongoose": "^5.6.11",
-    "socket.io": "^2.2.0"
-  },
-  "devDependencies": {
-    "concurrently": "^4.1.2",
-    "nodemon": "^1.19.1"
+    "lodash": "^4.17.14",
+    "mongoose": "^5.5.3"
   }
 }

@@ -4,7 +4,7 @@ const db = require("../models")
 
 module.exports = {
     findAllSaved: (req, res) => {
-        db.SavedAudio
+        db.SavedBooks
         .find()
         .then(function(result){
             res.json(result)
@@ -13,18 +13,19 @@ module.exports = {
     },
 
     create: (req, res) => {
-        db.SavedAudio
+        db.SavedBooks
         .create({
             title: req.body.title,
             link: req.body.link,
-            type: req.body.type,
+            thumbnail: req.body.thumbnail,
+            author: req.body.author,
+            description: req.body.description,
             key: req.body.key
         })
         .then(res.end())
-        .catch(err => res.status(500).json(err)); // added promise catch
     },
     remove: (req, res) => {
-        db.SavedAudio
+        db.SavedBooks
         .findById({ _id: req.params.id })
         .then(dbModel => dbModel.remove())
         .then(dbModel => res.json(dbModel))
