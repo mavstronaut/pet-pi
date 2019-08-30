@@ -4,7 +4,7 @@ import SearchResult from "../components/SearchResult";
 import BookItemCard from "../components/BookItemCard"; /* this component is used for the sound cards */
 import SaveCard from "../components/SaveResult";
 import API from "../utils/API";
-// import hardcode from "../utils/hardSound";
+import audioDefault from "../utils/hardSounds";
 
 // this is for login
 import Login from "../components/LoginCard";
@@ -149,7 +149,7 @@ class Books extends Component {
                                         <BookItemCard
                                             key={sound.id}
                                             href={sound.volumeInfo.previewLink}
-                                            thumbnail={(sound.volumeInfo.imageLinks) ? (sound.volumeInfo.imageLinks.thumbnail) : ("http://blogs.smithsonianmag.com/design/files/2013/03/smiley-face-1.jpg")}
+                                            thumbnail={(sound.volumeInfo.imageLinks) ? (sound.volumeInfo.imageLinks.thumbnail) : ("https://i.imgur.com/R3q09Me.png")}
                                             save={this.handleSave}
                                             index={i}
                                         />
@@ -170,12 +170,22 @@ class Books extends Component {
                                         key={sound._id}
                                         title={sound.title}
                                         href={sound.link}
-                                        thumbnail={(sound.thumbnail) ? (sound.thumbnail) : ("http://blogs.smithsonianmag.com/design/files/2013/03/smiley-face-1.jpg")}                                        delete={this.handleDelete}
+                                        thumbnail={(sound.thumbnail) ? (sound.thumbnail) : ("https://i.imgur.com/R3q09Me.png")}                                        
+                                        delete={this.handleDelete}
                                         index={i}
                                     />
                                 )
                             })
                         ) : (
+                            this.state. // function to hold
+                                    <BookItemCard
+                                        key={sound._id}
+                                        key={sound.title}
+                                        href={sound.link}
+                                        thumbnail={(sound.thumbnail) ? (sound.thumbnail) : ("https://i.imgur.com/R3q09Me.png")}
+                                    />
+                        
+                                )
                                 <h3>No Saved Sounds</h3>
                             )}
                     </SaveCard>
