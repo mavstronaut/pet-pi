@@ -26,6 +26,7 @@
     "mongoose": "^5.5.3",
     "simple-youtube-api": "^2.1.0",
     "socket.io": "^2.2.0",
+    "socket.io-stream": "^0.9.1",
     "ytdl-core": "^0.29.5"
   }
 }

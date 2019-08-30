@@ -5,6 +5,21 @@ const youtube = new ytapi(process.env.YOUTUBE_KEY) || new ytapi(YOUTUBE_KEY);
 const db = require("../models")
 const yt = require("ytdl-core");
 
+// for server local socket event response
+const ss = require('socket.io-stream');
+const app = express();
+const io = require('socket.io').listen(app);
+
+// from local play 
+// const http = require('http');
+// const fileSystem = require('fs');
+// const express = require('express');
+// const ss = require('socket.io-stream');
+// const path = require('path');
+// const app = express();
+// const api = express();
+
+
 // require the owner controller so we can get the active user
 // const userController = require("./userController");
 
@@ -59,42 +74,110 @@ module.exports = {
         .then(dbModel => songTitle.json(dbModel))
         .catch(err => res.status(422).json(err));
       
+
       var id = songTitle.link;
       console.log(id);
-      
+
+      //  check user model for all id's 
+      db.Users
+        .findById({ _id: req.params.id })
+        .then(dbModel => activeUsers.json(dbModel))
+        .catch(err => res.status(422).json(err));
+        
        // create this variable from within the user model, might need to perform a get method for the user who is logged in to the client
       var activeUser = db.activeUsers.email;
 
       if (activeUser === "mavbarona@gmail.com") {
         // plays song, we will create the socket.io function here which will then have the argument dispatcher
-        const dispatcher = yt(songTitle.link);
-        yt(songTitle.link);
+        const navigator = yt(songTitle.link);
+        
+        
+        
+        
+            navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+            // window.URL.createObjectURL = window.URL.createObjectURL || window.URL.webkitCreateObjectURL || window.URL.mozCreateObjectURL || window.URL.msCreateObjectURL;
+        
+            navigator.getUserMedia({video: true}, function (id) {
+              allow.style.display = "none";
+              // videoStreamUrl = window.URL.createObjectURL(stream);
+              videoStreamUrl = id;
+              video.src = videoStreamUrl;
+            }, function () {
+              console.log('streaming error');
+            });
+         
+     
+        
+
+
+          // for streaming a local sound file
+        /*
+           // generate file path
+            const filePath = path.resolve(__dirname, './audio', './'+req);
+            // get file size info
+            const stat = fileSystem.statSync(filePath);
+
+            // set response header info
+            res.writeHead(200, {
+              'Content-Type': 'audio/mpeg',
+              'Content-Length': stat.size
+            });
+            //create read stream
+            const readStream = fileSystem.createReadStream(filePath);
+            // attach this stream with response stream
+            readStream.pipe(res);
+          });
+
+          //register api calls
+          app.use('/api/v1/', api);
+
+          // send react app on / GET
+          app.use(express.static(path.resolve(__dirname, './public/build/')));
+          app.use(express.static(path.resolve(__dirname, './public/assets/')));
+          app.get('*', (req, res) => {
+            res.sendFile(path.resolve(__dirname, './public/build/', './index.html'));
+          });
+
+          const server = http.createServer(app);
+          const io = require('socket.io').listen(server, {
+            log: false,
+            agent: false,
+            origins: '*:*',
+            transports: ['websocket', 'htmlfile', 'xhr-polling', 'jsonp-polling', 'polling']
+          });
+
+          io.on('connection', client => {
+
+            const stream = ss.createStream();
+
+            client.on('track', () => {
+              const filePath = path.resolve(__dirname, './private', './track.wav');
+              const stat = fileSystem.statSync(filePath);
+              const readStream = fileSystem.createReadStream(filePath);
+              // pipe stream with response stream
+              readStream.pipe(stream);
+
+              ss(client).emit('track-stream', stream, { stat });
+            });
+            client.on('disconnect', () => {});
+          }); */
+
+        // deprecated 
         // const dispatcher = message.guild.voiceConnection.playStream(yt(nextSong.url, {
         //   quality: 'lowest',
         //   filter: 'audioonly'
         // })
-        // stops song
+
+
+        // stops song (doesn't work, i think this will be a front end solution instead.)
         dispatcher.on('end', () => {
             console.log("button unclicked");
-            // message.channel.sendMessage('End of the queue, add more songs!');
-            // message.guild.voiceConnection.disconnect();
-            // message.client.queues.delete(message.guild.id);
+          
+            
           });
       } else {
         console.log("user doesn't have permission to play sound");
-        // embed
-        //   .setTitle(`**${info.title}** (${minutes}:${seconds}) has been added to the queue`)
-        //   .setColor(0xDD2825)
-        //   .setFooter(`Requested by ${message.guild.member(message.author).displayName}`, message.author.avatarURL)
-        //   .setImage(`https://i.ytimg.com/vi/${info.id}/mqdefault.jpg`)
-        //   .setTimestamp()
-        //   .setURL(`https://www.youtube.com/watch?v=${info.id}`);
-        // if (embedCheck(message)) {
-        //   message.channel.sendEmbed(embed, '', {
-        //     disableEveryone: true
-        //   }).catch(console.error);
-        // } else {
-        //   message.channel.sendMessage(`**${info.title}** (${minutes}:${seconds}) has been added to the queue`);
+        
         
       }
     }
