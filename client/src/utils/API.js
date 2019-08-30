@@ -1,11 +1,10 @@
 import axios from "axios";
-import youtube from "simple-youtube-api";
 
 export default {
   // call to the Google Book API when searching for a book
   searchSounds: function(query) {
     // validates that it came from youtube
-    
+    return axios.post("/api/sounds/play" + query)
   },
 
   // display the saved sounds from our database

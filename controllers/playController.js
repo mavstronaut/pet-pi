@@ -25,6 +25,29 @@ module.exports = {
         id = results[0].id;
       }
 
+        // some validation early on 
+        if (user === "mavbarona@gmail.com" && parseInt(info.durationSeconds) > 900) return console.log('Songs can be no longer than 15 minutes.').catch(console.error);
+        
+        // in the event we want to add minutes and seconds to the data model 
+        let time = parseInt(info.durationSeconds, 10);
+        let minutes = Math.floor(time / 60);
+        let seconds = time % 60;
+        if (seconds < 10) seconds = '0' + seconds; 
+
+        function addNew (req, res) => {
+
+          db.SavedSounds
+          .create({
+              title: req.body.title,
+              link: req.body.link,
+              type: req.body.type, // is the type part of the req.body.type? it will come from the form
+              key: req.body.key
+          })
+          .then(res.end())
+      }
+
+      addNew(id);
+
     },
     playSong: async(req, res) => { 
       let songTitle = ""

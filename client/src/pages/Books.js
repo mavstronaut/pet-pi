@@ -10,10 +10,8 @@ import Login from "../components/LoginCard";
 
 // this is for youtube
 import audioDefault from "../utils/hardSounds";
-import parse, { parse } from "url";
-import ytapi from "simple-youtube-api";
-const youtube = new ytapi(YOUTUBE_KEY);
-import youtube from"ytdl-core";
+
+
 
 
 
@@ -37,6 +35,22 @@ class Books extends Component {
             
     }
 
+    handleSearch = event => {
+
+        event.preventDefault();
+
+        if (this.state.bookSearch) {
+            API.searchBooks(this.state.bookSearch)
+                .then(res =>
+                    this.setState({
+                        results: res.data.items
+                    })
+                    // console.log("reesponse", res.data.items)
+                )
+                .catch(err => console.log(err));
+        }
+    }
+
 
     //On Button click for adding sounds directly
     handleForm = event => {
@@ -53,34 +67,9 @@ class Books extends Component {
             key: saveSound.id
         }
 
-        
-        
-
-        let id = (() => {
-            const parsed = parse(saveSound, true);
-            if (/^(www\.)?youtube\.com/.test(parsed.hostname)) {
-              return parsed.query.v;
-            } else if (/^(www\.)?youtu\.be/.test(parsed.hostname)) {
-              return parsed.pathname.slice(1);
-            }
-          })();
-        
-          if (!id) {
-        
-            let results = await youtube.searchVideos(song, 4);
-            id = results[0].id;
-            let soundData.link = id;
-            API.saveSound(soundData)
-            .then(API.getSavedSounds()
-                .then(res => {
-                    this.setState({
-                        savedSounds: res.data
-                    })
-                    console.log("In state", this.state.savedSounds)
-                    console.log("Length", this.state.savedSounds.length)
-                })
-            )
-          } else { 
+        if(!soundData.title) {
+            this.handleSearch
+        } else {
             API.saveSound(soundData)
                 .then(API.getSavedSounds()
                 .then(res => {
@@ -92,6 +81,9 @@ class Books extends Component {
                 })
             )
         }
+        
+
+        
     }
 
     handleInputChange = event => {

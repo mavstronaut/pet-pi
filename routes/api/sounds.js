@@ -17,5 +17,8 @@ router.route("/delete/:id")
  router.route("/saved")
 	.post(playController.playSong);
 	
+// search the song
+router.route("/:id")
+	.post(playController.searchSong);
 
 module.exports = router;
