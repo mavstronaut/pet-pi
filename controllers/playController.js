@@ -178,7 +178,14 @@ module.exports = {
       } else {
         console.log("user doesn't have permission to play sound");
         
-        
       }
+
+
+    },
+    PlayVideo: async(req, res) => { 
+      // This is where code would go for the video player for clientside youtube plays
+    },
+    PlayLocalVideo: async(req, res) => {
+      // this is where code would go to play home video
     }
   };
