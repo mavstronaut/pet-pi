@@ -39,8 +39,17 @@ class Books extends Component {
 
         event.preventDefault();
 
-        if (this.state.bookSearch) {
-            API.searchBooks(this.state.bookSearch)
+        const saveSound = this.state.form;
+        console.log(saveSound);
+
+        let soundData = {
+            link: saveSound.Link,
+            type: saveSound.type,
+            key: saveSound.id
+        }
+
+        if (this.state.form) {
+            API.searchBooks(soundData.link, soundData)
                 .then(res =>
                     this.setState({
                         results: res.data.items
