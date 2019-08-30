@@ -34,7 +34,7 @@ module.exports = {
         let seconds = time % 60;
         if (seconds < 10) seconds = '0' + seconds; 
 
-        function addNew (req, res) => {
+        function addNew (req, res)  {
 
           db.SavedSounds
           .create({
