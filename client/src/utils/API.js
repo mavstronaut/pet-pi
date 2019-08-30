@@ -5,21 +5,7 @@ export default {
   // call to the Google Book API when searching for a book
   searchSounds: function(query) {
     // validates that it came from youtube
-    let id = (() => {
-      const parsed = parse(song, true);
-      if (/^(www\.)?youtube\.com/.test(parsed.hostname)) {
-        return parsed.query.v;
-      } else if (/^(www\.)?youtu\.be/.test(parsed.hostname)) {
-        return parsed.pathname.slice(1);
-      }
-    })();
-  
-    if (!id) {
-      let results = await youtube.searchVideos(song, 4);
-      id = results[0].id;
-    }
-
-    return id;
+    
   },
 
   // display the saved sounds from our database

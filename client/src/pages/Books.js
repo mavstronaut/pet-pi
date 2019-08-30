@@ -4,12 +4,16 @@ import SearchResult from "../components/SearchResult";
 import BookItemCard from "../components/BookItemCard"; /* this component is used for the sound cards */
 import SaveCard from "../components/SaveResult";
 import API from "../utils/API";
-import audioDefault from "../utils/hardSounds";
 
 // this is for login
 import Login from "../components/LoginCard";
 
 // this is for youtube
+import audioDefault from "../utils/hardSounds";
+import parse, { parse } from "url";
+import ytapi from "simple-youtube-api";
+const youtube = new ytapi(YOUTUBE_KEY);
+import youtube from"ytdl-core";
 
 
 
@@ -22,6 +26,7 @@ class Books extends Component {
     };
 
     componentDidMount (){
+
         API.getSavedSounds()
                 .then(res => {
                     this.setState({
@@ -33,20 +38,59 @@ class Books extends Component {
     }
 
 
-    //On Button click for searching sounds 
-    handleSearch = event => {
+    //On Button click for adding sounds directly
+    handleForm = event => {
 
         event.preventDefault();
 
-        if (this.state.soundSearch) {
-            API.searchSounds(this.state.soundSearch)
-                .then(res =>
+        const saveSound = this.state.form;
+        console.log(saveSound);
+
+        let soundData = {
+            title: saveSound.title,
+            link: saveSound.Link,
+            type: saveSound.type,
+            key: saveSound.id
+        }
+
+        
+        
+
+        let id = (() => {
+            const parsed = parse(saveSound, true);
+            if (/^(www\.)?youtube\.com/.test(parsed.hostname)) {
+              return parsed.query.v;
+            } else if (/^(www\.)?youtu\.be/.test(parsed.hostname)) {
+              return parsed.pathname.slice(1);
+            }
+          })();
+        
+          if (!id) {
+        
+            let results = await youtube.searchVideos(song, 4);
+            id = results[0].id;
+            let soundData.link = id;
+            API.saveSound(soundData)
+            .then(API.getSavedSounds()
+                .then(res => {
                     this.setState({
-                        results: res.data.items
+                        savedSounds: res.data
                     })
-                    // console.log("reesponse", res.data.items)
-                )
-                .catch(err => console.log(err));
+                    console.log("In state", this.state.savedSounds)
+                    console.log("Length", this.state.savedSounds.length)
+                })
+            )
+          } else { 
+            API.saveSound(soundData)
+                .then(API.getSavedSounds()
+                .then(res => {
+                    this.setState({
+                        savedSounds: res.data
+                    })
+                    console.log("In state", this.state.savedSounds)
+                    console.log("Length", this.state.savedSounds.length)
+                })
+            )
         }
     }
 
@@ -138,7 +182,7 @@ class Books extends Component {
                         <SearchCard
                             value={this.state.soundSearch}
                             onChange={this.handleInputChange}
-                            onClick={this.handleSearch}
+                            onClick={this.handleForm}
                         />
 
                         <SearchResult>
@@ -150,7 +194,7 @@ class Books extends Component {
                                             key={sound.id}
                                             href={sound.volumeInfo.previewLink}
                                             thumbnail={(sound.volumeInfo.imageLinks) ? (sound.volumeInfo.imageLinks.thumbnail) : ("https://i.imgur.com/R3q09Me.png")}
-                                            save={this.handleSave}
+                                            save={this.handleSearchSave}
                                             index={i}
                                         />
                                     )

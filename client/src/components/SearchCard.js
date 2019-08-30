@@ -11,6 +11,10 @@ function SearchCard(props) {
                             <label >Sound</label>
                             <input type="text" className="form-control" value={props.value} onChange={props.onChange} placeholder="Example: http://youtube.com/?= Youtube Link" required/>
                         
+                            <label >Title</label>
+                            <input type="text" className="form-control" value={props.value} onChange={props.onChange} placeholder="Short name for sound effect" required/>
+                        
+                            <label >Sound Purpose:</label>
                             <select class="form-control" id="sound-type">
                                 <option value="alert">Alert</option>
                                 <option value="distract">Distract</option>
