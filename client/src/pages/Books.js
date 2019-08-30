@@ -168,8 +168,10 @@ class Books extends Component {
     }
 
     handlePlay = event => {
-        // create on click event
-        API.playSound(clicked)
+       
+        // send the url from the object to the playSound backend controller
+        API.playSound(this.href)
+
     }
 
 
@@ -229,6 +231,7 @@ class Books extends Component {
                                         key={sound.title}
                                         href={sound.link}
                                         thumbnail={(sound.thumbnail) ? (sound.thumbnail) : ("https://i.imgur.com/R3q09Me.png")}
+                                        play={this.handlePlay}
                                         delete={this.handleDelete}
                                         index={i}
                                     />

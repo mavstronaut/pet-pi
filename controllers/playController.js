@@ -5,6 +5,8 @@ const youtube = new ytapi(process.env.YOUTUBE_KEY) || new ytapi(YOUTUBE_KEY);
 const db = require("../models")
 const yt = require("ytdl-core");
 
+// require the owner controller so we can get the active user
+// const userController = require("./userController");
 
 // message, args
 module.exports = {
@@ -59,26 +61,11 @@ module.exports = {
       
       var id = songTitle.link;
       console.log(id);
-
-      var activeUser = db.Users.email;
-
-      // let id = (() => {
-      //   const parsed = parse(song, true);
-      //   if (/^(www\.)?youtube\.com/.test(parsed.hostname)) {
-      //     return parsed.query.v;
-      //   } else if (/^(www\.)?youtu\.be/.test(parsed.hostname)) {
-      //     return parsed.pathname.slice(1);
-      //   }
-      // })();
-    
-      // let info;
-      // try {
-      //   info = await youtube.getVideo(id);
-      // } catch (e) {
-      //   return console.log(`\`An error occurred: ${e}\``);
-      // }
-    
       
+       // create this variable from within the user model, might need to perform a get method for the user who is logged in to the client
+      var activeUser = db.activeUsers.email;
+
+    
       if (activeUser === "mavbarona@gmail.com") {
         // plays song
         const dispatcher = yt(songTitle.link);
