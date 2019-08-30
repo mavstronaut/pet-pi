@@ -65,9 +65,8 @@ module.exports = {
        // create this variable from within the user model, might need to perform a get method for the user who is logged in to the client
       var activeUser = db.activeUsers.email;
 
-    
       if (activeUser === "mavbarona@gmail.com") {
-        // plays song
+        // plays song, we will create the socket.io function here which will then have the argument dispatcher
         const dispatcher = yt(songTitle.link);
         yt(songTitle.link);
         // const dispatcher = message.guild.voiceConnection.playStream(yt(nextSong.url, {
