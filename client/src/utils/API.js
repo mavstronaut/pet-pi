@@ -34,4 +34,12 @@ export default {
   /* playSound: function(soundLink) {
     return axios.post("/api/play/" + soundLink);
   } */
+
+  // user api routes
+
+
+  // future options to add to backend from here for the node-media-stream of video
+  // API.playVideo(this.state.link) { post link to get stream response }
+
+  // API.playLocalVideo(homeLink) { get method for feed}
 };

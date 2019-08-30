@@ -27,7 +27,8 @@ class Books extends Component {
         savedSounds: [],
         soundSearch: "",
         link: "",
-        localSound: 0
+        localSound: 0,
+        // videoState: 0
     };
 
     componentDidMount (){
@@ -201,6 +202,35 @@ class Books extends Component {
         }
     }
 
+    /*
+    handleVideoPlayer = event => {
+        if (this.state.videoState === 0) {
+            this.setState({
+                videoState: "player"
+            })
+            console.log(this.state.videoState);
+        } else {
+            this.setState({
+                videoState: 0
+            })
+            console.log(this.state.videoState);
+        }
+    }
+
+    handleVideoPlay = event => {
+        
+        if (this.state.videoState === 1) {
+            // logic to play sound locally in window using embedded player    
+
+
+            API.playVideo(this.state.link)
+        } else {
+            // send the url from the object to the backend playNodeMediaStream
+            API.playLocalVideo(homeLink)
+        }
+    }  
+    */
+
 
 
 
@@ -215,9 +245,9 @@ class Books extends Component {
                             onClick={this.handleForm}
                         />
 
-                        <SearchResult>
+                        <SearchResult
                         value={this.state.localSound}
-                        onClick={this.handleLocalToggle}
+                        onClick={this.handleLocalToggle}>
                             {this.state.results.length ? (
 
                                 this.state.results.map( (sound, i) => {
@@ -236,6 +266,12 @@ class Books extends Component {
                                     <h3>No Results to Display</h3>
                                 )}
                         </SearchResult>
+
+                                
+                        
+                        {/* <VideoPlayer
+                            link={this.state.link=sound.link}
+                        /> */}
                     </div>
                     :
                     <SaveCard
@@ -273,14 +309,23 @@ class Books extends Component {
 
                                     )
                                 })
+
+
+                                
                             )}
                     </SaveCard>
-                    <VideoPlayer
-                        link={this.state.link=sound.link}
-                    />
+                    
+                    
                 }
-
+                    
             </div>
+
+                    // commented out component to be used to play the audio of a song or the video stream
+                    // <VideoPlayer
+                    //     link={this.state.link=sound.link}
+                    //     value={this.state.videoState}
+                    //     action={this.playVideo}
+                    // />
         )
     }
 
