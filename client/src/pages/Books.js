@@ -10,6 +10,7 @@ import Login from "../components/LoginCard";
 
 // this is for youtube
 import audioDefault from "../utils/hardSounds";
+//import VideoPlayer from "../components/VideoPlayer";
 
 
 
@@ -20,7 +21,9 @@ class Books extends Component {
     state = {
         results: [],
         savedSounds: [],
-        soundSearch: ""
+        soundSearch: "",
+        link: "",
+        localSound: 0
     };
 
     componentDidMount (){
@@ -167,11 +170,31 @@ class Books extends Component {
         
     }
 
-    handlePlay = event => {
-       
-        // send the url from the object to the playSound backend controller
-        API.playSound(this.href)
+    handleLocalToggle = event => {
+        if (this.state.localSound === 0) {
+            this.setState({
+                localSound: 1
+            })
+            console.log(this.state.localSound);
+        } else {
+            this.setState({
+                localSound: 0
+            })
+            console.log(this.state.localSound);
+        }
+    }
 
+    handlePlay = event => {
+        
+        if (this.state.localSound === 1) {
+            // logic to play sound locally in window using embedded player    
+
+
+            API.playSound(this.state.link)
+        } else {
+            // send the url from the object to the playSound backend controller
+            API.playSound(this.state.link)
+        }
     }
 
 
@@ -189,6 +212,8 @@ class Books extends Component {
                         />
 
                         <SearchResult>
+                        value={this.state.localSound}
+                        onClick={this.handleLocalToggle}
                             {this.state.results.length ? (
 
                                 this.state.results.map( (sound, i) => {
@@ -198,6 +223,7 @@ class Books extends Component {
                                             href={sound.volumeInfo.previewLink}
                                             thumbnail={(sound.volumeInfo.imageLinks) ? (sound.volumeInfo.imageLinks.thumbnail) : ("https://i.imgur.com/R3q09Me.png")}
                                             save={this.handleSearchSave}
+                                            play={this.handlePlay}  
                                             index={i}
                                         />
                                     )
@@ -209,15 +235,19 @@ class Books extends Component {
                     </div>
                     :
                     <SaveCard>
+                        value={this.state.localSound}
+                        onClick={this.handleLocalToggle}
                         {this.state.savedSounds.length ? (
 
                             this.state.savedSounds.map((sound, i) => {
                                 return (
                                     <BookItemCard
+                                        link={this.state.link=sound.link}
                                         key={sound._id}
                                         title={sound.title}
                                         href={sound.link}
-                                        thumbnail={(sound.thumbnail) ? (sound.thumbnail) : ("https://i.imgur.com/R3q09Me.png")}                                        
+                                        thumbnail={(sound.thumbnail) ? (sound.thumbnail) : ("https://i.imgur.com/R3q09Me.png")}   
+                                        play={this.handlePlay}                                     
                                         delete={this.handleDelete}
                                         index={i}
                                     />
@@ -227,8 +257,9 @@ class Books extends Component {
                             audioDefault.state.savedSounds.map((sound, i) =>{// function to hold 
                                 return (
                                     <BookItemCard
+                                        link={this.state.link=sound.link}
                                         key={sound._id}
-                                        key={sound.title}
+                                        title={sound.title}
                                         href={sound.link}
                                         thumbnail={(sound.thumbnail) ? (sound.thumbnail) : ("https://i.imgur.com/R3q09Me.png")}
                                         play={this.handlePlay}
