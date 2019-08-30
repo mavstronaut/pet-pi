@@ -21,4 +21,6 @@ router.route("/delete/:id")
 router.route("/:id")
 	.post(playController.searchSong);
 
+// we may need some route for the login api? check passport docs
+
 module.exports = router;
