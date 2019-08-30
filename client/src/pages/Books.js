@@ -4,6 +4,7 @@ import SearchResult from "../components/SearchResult";
 import BookItemCard from "../components/BookItemCard"; /* this component is used for the sound cards */
 import SaveCard from "../components/SaveResult";
 import API from "../utils/API";
+// import hardcode from "../utils/hardSound";
 
 // this is for login
 import Login from "../components/LoginCard";
