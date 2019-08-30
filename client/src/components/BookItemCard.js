@@ -1,6 +1,6 @@
 import React from "react"; 
 
-// may be used for search 
+// may be used for search, also used for savecard (the sound cards)
 
 function BookItemCard(props) { 
 
@@ -17,6 +17,7 @@ function BookItemCard(props) {
                     <h5 className="card-title">{props.title}</h5>
 
                 </div>
+                
                 <a href={props.href} target="_blank" className="btn btn-primary" role="button">View</a>
                 {window.location.pathname ===  "/" ?  
 
