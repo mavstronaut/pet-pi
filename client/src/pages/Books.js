@@ -12,6 +12,10 @@ import Login from "../components/LoginCard";
 import audioDefault from "../utils/hardSounds";
 //import VideoPlayer from "../components/VideoPlayer";
 
+import VideoPlayer from "./components/VideoPlayer";
+
+
+
 
 
 
@@ -234,9 +238,9 @@ class Books extends Component {
                         </SearchResult>
                     </div>
                     :
-                    <SaveCard>
+                    <SaveCard
                         value={this.state.localSound}
-                        onClick={this.handleLocalToggle}
+                        onClick={this.handleLocalToggle}>
                         {this.state.savedSounds.length ? (
 
                             this.state.savedSounds.map((sound, i) => {
@@ -271,6 +275,9 @@ class Books extends Component {
                                 })
                             )}
                     </SaveCard>
+                    <VideoPlayer
+                        link={this.state.link=sound.link}
+                    />
                 }
 
             </div>
