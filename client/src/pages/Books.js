@@ -177,16 +177,19 @@ class Books extends Component {
                                 )
                             })
                         ) : (
-                            this.state. // function to hold
+                            audioDefault.state.savedSounds.map((sound, i) =>{// function to hold 
+                                return (
                                     <BookItemCard
                                         key={sound._id}
                                         key={sound.title}
                                         href={sound.link}
                                         thumbnail={(sound.thumbnail) ? (sound.thumbnail) : ("https://i.imgur.com/R3q09Me.png")}
+                                        delete={this.handleDelete}
+                                        index={i}
                                     />
-                        
-                                )
-                                <h3>No Saved Sounds</h3>
+
+                                    )
+                                })
                             )}
                     </SaveCard>
                 }
