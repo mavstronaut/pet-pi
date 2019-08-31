@@ -6,5 +6,6 @@ router.use("/sounds", soundRoutes);
 
 // User routes
 router.use("/login", jwt);
+router.use("/user");
 
 module.exports = router;
