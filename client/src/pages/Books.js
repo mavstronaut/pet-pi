@@ -284,13 +284,12 @@ class Books extends Component {
                         /> */}
                     </div>
                     :
-                    <div>
-                        {/* <Login
+                        /* <Login
                             value={this.state.email}
                             onChange={this.handleInputChange}
                             onClick={this.handleLogin}
-                        /> */}
-                    </div>
+                        /> */
+                
                     <SaveCard
                         value={this.state.localSound}
                         onClick={this.handleLocalToggle}>
