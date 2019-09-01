@@ -1,13 +1,13 @@
 import Passport from 'passport';
 import GoogleStrategy from 'passport-google-oauth';
-import { devConfig } from '../../config/development';
+require('dotenv').config();
 import User from '../user/user.model';
 
 export const configGoogleStrategy = () => {
     Passport.use(new GoogleStrategy.OAuth2Strategy({
-        clientID: devConfig.google.clientId,
-        clientSecret: devConfig.google.clientSecret,
-        callbackURL: devConfig.google.callbackURL
+        clientID: GOOG_CLIENTID,
+        clientSecret: GOOG_CLIENTSECRET,
+        callbackURL: CALLBACKURL
     },
   async (accessToken, refreshToken, profile, done) => {
       try{
