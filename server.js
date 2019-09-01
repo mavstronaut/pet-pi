@@ -7,6 +7,8 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // passport imports
+const passport = require('passport');
+const session = require('express-session');
 const configureJWTStrategy = require('./routes/api/middlewares/passport-jwt');
 const User = require('./models/user');
 const configGoogleStrategy = require('./routes/api/middlewares/passport-google');

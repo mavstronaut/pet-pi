@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-export default {
+module.exports = {
     validateSchema(body) {
         const schema = Joi.object().keys({
             email: Joi.string()
