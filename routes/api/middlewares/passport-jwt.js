@@ -1,10 +1,10 @@
-import Passport from 'passport';
-import PassportJWT from 'passport-jwt';
+const Passport = require('passport');
+const PassportJWT = require('passport-jwt');
 require('dotenv').config();
-import userController from '../../../controllers/userController';
-import User from '../user/user.model';
+const userController = require('../../../controllers/userController');
+const User = require('../user/user.model');
 
-export const configureJWTStrategy = () => {
+const configureJWTStrategy = () => {
   const opts = {};
   opts.jwtFromRequest = PassportJWT.ExtractJwt.fromAuthHeaderAsBearerToken();
   opts.secretOrKey = SECRET;
@@ -22,3 +22,5 @@ export const configureJWTStrategy = () => {
     })
   );
 };
+
+module.exports = configureJWTStrategy; 

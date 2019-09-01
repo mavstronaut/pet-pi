@@ -3,7 +3,7 @@ const GoogleStrategy = require('passport-google-oauth');
 require('dotenv').config();
 const User = require('../../../models/user');
 
-export const configGoogleStrategy = () => {
+const configGoogleStrategy = () => {
     Passport.use(new GoogleStrategy.OAuth2Strategy({
         clientID: GOOG_CLIENTID,
         clientSecret: GOOG_CLIENTSECRET,
@@ -31,3 +31,5 @@ export const configGoogleStrategy = () => {
   )
 )
 }
+
+module.exports = configGoogleStrategy; 
