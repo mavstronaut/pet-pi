@@ -1,7 +1,7 @@
 import React from "react"; 
 
 // this displays the sounds available to play
-
+// can i bring both props and children in as multiple parameter arguments?
 function SavedResult({children}) {  
     return (
       <div className="container mt-3">

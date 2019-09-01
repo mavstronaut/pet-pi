@@ -6,17 +6,17 @@ import SaveCard from "../components/SaveResult";
 import API from "../utils/API";
 
 // this is for login
-import Login from "../components/LoginCard";
+// import Login from "../components/LoginCard";
 
 // this is for youtube
 import audioDefault from "../utils/hardSounds";
 //import VideoPlayer from "../components/VideoPlayer";
 
-import VideoPlayer from "../components/VideoPlayer";
+// import VideoPlayer from "../components/VideoPlayer";
 
 
 
-
+// login form will probably require redux to have secure form secrets
 
 
 
@@ -28,6 +28,7 @@ class Books extends Component {
         soundSearch: "",
         link: "",
         localSound: 0,
+        // login: [],
         // videoState: 0
     };
 
@@ -85,7 +86,16 @@ class Books extends Component {
         }
 
         if(!soundData.title) {
-            this.handleSearch
+            if (this.state.form) {
+                API.searchBooks(soundData.link, soundData)
+                    .then(res =>
+                        this.setState({
+                            results: res.data.items
+                        })
+                        // console.log("reesponse", res.data.items)
+                    )
+                    .catch(err => console.log(err));
+            }
         } else {
             API.saveSound(soundData)
                 .then(API.getSavedSounds()
@@ -274,6 +284,13 @@ class Books extends Component {
                         /> */}
                     </div>
                     :
+                    <div>
+                        {/* <Login
+                            value={this.state.email}
+                            onChange={this.handleInputChange}
+                            onClick={this.handleLogin}
+                        /> */}
+                    </div>
                     <SaveCard
                         value={this.state.localSound}
                         onClick={this.handleLocalToggle}>
@@ -326,6 +343,7 @@ class Books extends Component {
                     //     value={this.state.videoState}
                     //     action={this.playVideo}
                     // />
+                    
         )
     }
 

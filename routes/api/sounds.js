@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const soundsController = require("../../controllers/soundscontroller");
+const soundsController = require("../../controllers/soundsController");
 const playController = require("../../controllers/playController");
 
 // Landing page call
