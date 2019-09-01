@@ -3,10 +3,10 @@
 const db = require("../models")
 
 // passport imports
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-import User from '../models/user';
-import userService from './userService';
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const User = require('../models/user');
+const userService = require('./userService');
 require('dotenv').config();
 
 
