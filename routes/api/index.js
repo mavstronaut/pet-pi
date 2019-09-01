@@ -2,7 +2,7 @@ const router = require("express").Router();
 const soundRoutes = require("./sounds");
 
 // adding login es6 syntax
-const userRouter = require('./api/user');
+const userRouter = require('./user');
 
 
 // Sound routes

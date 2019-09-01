@@ -6,9 +6,10 @@ const db = require("../models")
 const yt = require("ytdl-core");
 
 // for server local socket event response
+// const express = require("express");
 const ss = require('socket.io-stream');
-const app = express();
-const io = require('socket.io').listen(app);
+// const app = express();
+// const io = require('socket.io').listen(app);
 
 // from local play 
 // const http = require('http');
@@ -95,7 +96,7 @@ module.exports = {
         
         
             navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-            // window.URL.createObjectURL = window.URL.createObjectURL || window.URL.webkitCreateObjectURL || window.URL.mozCreateObjectURL || window.URL.msCreateObjectURL;
+            window.URL.createObjectURL = window.URL.createObjectURL || window.URL.webkitCreateObjectURL || window.URL.mozCreateObjectURL || window.URL.msCreateObjectURL;
         
             navigator.getUserMedia({video: true}, function (id) {
               allow.style.display = "none";
