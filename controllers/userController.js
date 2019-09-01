@@ -31,6 +31,7 @@ module.exports = {
           }
     },
     login: async(req, res) => {
+        var SECRET = process.env.SECRET
         try {
             const { error, value } = userService.validateSchema(req.body);
             if (error) {

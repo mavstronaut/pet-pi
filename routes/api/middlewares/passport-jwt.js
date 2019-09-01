@@ -2,10 +2,12 @@ const Passport = require('passport');
 const PassportJWT = require('passport-jwt');
 require('dotenv').config();
 const userController = require('../../../controllers/userController');
-const User = require('../user/user.model');
+const User = require('../../../models/user');
+
 
 const configureJWTStrategy = () => {
   const opts = {};
+  var SECRET = process.env.SECRET;
   opts.jwtFromRequest = PassportJWT.ExtractJwt.fromAuthHeaderAsBearerToken();
   opts.secretOrKey = SECRET;
   Passport.use(

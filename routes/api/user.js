@@ -3,25 +3,27 @@ const userController = require("../../controllers/userController");
 const passport = require('passport');
 
 // Signup
-router.route("/signup")
-	.post(userController.signup);
+router.post('/signup', userController.signup);
 
 // Login
-router.route("/login")
-  	.get(userController.login);
+router.post('/login', userController.login);
 
 // authenticate
-router.route("/authenticate")
-    .get(passport.authenticate('jwt', {session: false}), userController.authenticate);
-	  
+router.get(
+  '/authenticate',
+  passport.authenticate('jwt', { session: false }),
+  userController.authenticate
+);
 	  
 // google auth
- router.route("/auth/google")
-	.get(passport.authenticate('google', { scope: ['profile', 'email']}));
-	
+router.post('/signup', userController.signup);
+router.post('/login', userController.login);
+
 // google auth fails
-router.route("/auth/google/callback")
-	.get(passport.authenticate('google', { failureRedirecdt: '/login' }),
-    userController.authSucccess);
+router.get(
+  '/authenticate',
+  passport.authenticate('jwt', { session: false }),
+  userController.authenticate
+);
 
 module.exports = router;

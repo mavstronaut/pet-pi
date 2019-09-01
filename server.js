@@ -43,6 +43,7 @@ mongoConnect(MONGODB_URI);
 
 
 // adding passport init
+var SECRET = process.env.SECRET;
 
 app.use(
   session({

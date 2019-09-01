@@ -4,6 +4,10 @@ require('dotenv').config();
 const User = require('../../../models/user');
 
 const configGoogleStrategy = () => {
+    var GOOG_CLIENTID = process.env.GOOG_CLIENTID;
+    var GOOG_CLIENTSECRET = process.env.GOOG_CLIENTSECRET;
+    var CALLBACKURL = process.env.CALLBACKURL;
+
     Passport.use(new GoogleStrategy.OAuth2Strategy({
         clientID: GOOG_CLIENTID,
         clientSecret: GOOG_CLIENTSECRET,

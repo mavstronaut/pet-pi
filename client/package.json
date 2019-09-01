@@ -9,6 +9,7 @@
     "react-dom": "^16.6.3",
     "react-router-dom": "^5.0.0",
     "react-scripts": "^2.1.1",
+    "redux-form": "^8.2.6",
     "simple-youtube-api": "^2.1.0",
     "ts-pnp": "^1.1.2",
     "ytdl-core": "^0.7.24"
