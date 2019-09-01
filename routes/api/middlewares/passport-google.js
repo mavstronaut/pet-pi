@@ -1,7 +1,7 @@
-import Passport from 'passport';
-import GoogleStrategy from 'passport-google-oauth';
+const Passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth');
 require('dotenv').config();
-import User from '../../../models/user';
+const User = require('../../../models/user');
 
 export const configGoogleStrategy = () => {
     Passport.use(new GoogleStrategy.OAuth2Strategy({
