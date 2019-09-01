@@ -8,6 +8,7 @@ export default {
   },
 
   // display the saved sounds from our database
+  // not working
   getSavedSounds: function() {
     try {
       return axios.get("/api/sounds/saved");

@@ -129,6 +129,7 @@ class Books extends Component {
         
     }
 
+    // this handles every form field at the same time lol. need to create one for each box
     handleInputChange = event => {
 
         const value = event.target.value;
