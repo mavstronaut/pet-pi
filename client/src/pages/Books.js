@@ -12,7 +12,7 @@ import Login from "../components/LoginCard";
 import audioDefault from "../utils/hardSounds";
 //import VideoPlayer from "../components/VideoPlayer";
 
-import VideoPlayer from "./components/VideoPlayer";
+import VideoPlayer from "../components/VideoPlayer";
 
 
 
