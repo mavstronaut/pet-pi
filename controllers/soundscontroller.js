@@ -1,6 +1,6 @@
 //require db 
 // import db from ("../models")
-const db = require("../models")
+const db = require("../models/SavedSounds")
 
 module.exports = {
     findAllSaved: (req, res) => {

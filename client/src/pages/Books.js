@@ -12,8 +12,8 @@ import API from "../utils/API";
 import audioDefault from "../utils/hardSounds";
 //import VideoPlayer from "../components/VideoPlayer";
 
-// import VideoPlayer from "../components/VideoPlayer";
-
+// hard coded sounds
+// import hardSounds from "../utils/hardSounds"
 
 
 // login form will probably require redux to have secure form secrets
@@ -40,8 +40,13 @@ class Books extends Component {
                         savedSounds: res.data
                     })
 
+                }).catch(API.getHardSounds()
+                    .then(res => {
+                        this.setState({
+                            savedSounds: res.data
+                        })
                 })
-            
+            )
     }
 
     handleSearch = event => {
@@ -97,17 +102,28 @@ class Books extends Component {
                     .catch(err => console.log(err));
             }
         } else {
-            API.saveSound(soundData)
-                .then(API.getSavedSounds()
-                .then(res => {
-                    this.setState({
-                        savedSounds: res.data
+            try {
+                API.saveSound(soundData)
+                    .then(API.getSavedSounds()
+                    .then(res => {
+                        this.setState({
+                            savedSounds: res.data
+                        })
+                        console.log("In state", this.state.savedSounds)
+                        console.log("Length", this.state.savedSounds.length)
                     })
-                    console.log("In state", this.state.savedSounds)
-                    console.log("Length", this.state.savedSounds.length)
-                })
-            )
+                )
+            } 
+            catch {
+                API.getHardSounds()
+                    .then(res => {
+                        this.setState({
+                            savedSounds: res.data
+                        })
+                    })
+            }
         }
+
         
 
         
@@ -134,7 +150,7 @@ class Books extends Component {
             key: saveSound.id
         }
 
-        
+        try {
         API.saveSound(soundData)
             .then(API.getSavedSounds()
                 .then(res => {
@@ -145,6 +161,15 @@ class Books extends Component {
                     console.log("Length", this.state.savedSounds.length)
                 })
             )
+        } 
+        catch {
+            API.getHardSounds()
+                .then(res => {
+                    this.setState({
+                        savedSounds: res.data
+                    })
+                })
+        }
     }
 
     handleSearchSave = event => {
@@ -160,7 +185,7 @@ class Books extends Component {
             key: saveSound.id
         }
 
-
+        try {
         API.saveSound(soundData.key, soundData)
             .then(API.getSavedSounds()
                 .then(res => {
@@ -171,6 +196,15 @@ class Books extends Component {
                     console.log("Length", this.state.savedSounds.length)
                 })
             )
+        } 
+        catch {
+            API.getHardSounds()
+                .then(res => {
+                    this.setState({
+                        savedSounds: res.data
+                    })
+                })
+        }
     }    
 
     handleDelete = event => {
@@ -284,7 +318,8 @@ class Books extends Component {
                         /> */}
                     </div>
                     :
-                        /* <Login
+                    // we might move this to its own card entirely
+                        /* <Login 
                             value={this.state.email}
                             onChange={this.handleInputChange}
                             onClick={this.handleLogin}
@@ -298,7 +333,6 @@ class Books extends Component {
                             this.state.savedSounds.map((sound, i) => {
                                 return (
                                     <BookItemCard
-                                        link={this.state.link=sound.link}
                                         key={sound._id}
                                         title={sound.title}
                                         href={sound.link}
@@ -313,7 +347,6 @@ class Books extends Component {
                             audioDefault.state.savedSounds.map((sound, i) =>{// function to hold 
                                 return (
                                     <BookItemCard
-                                        link={this.state.link=sound.link}
                                         key={sound._id}
                                         title={sound.title}
                                         href={sound.link}

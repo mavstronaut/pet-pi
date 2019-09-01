@@ -9,8 +9,17 @@ export default {
 
   // display the saved sounds from our database
   getSavedSounds: function() {
-    return axios.get("/api/sounds/saved" );
+    try {
+      return axios.get("/api/sounds/saved");
+    }
+    catch {
+      return axios.get("./hardSounds");
+    }
   },
+    // display the hard coded saved sounds from our database
+    getHardSounds: function() {
+      return axios.get("./hardSounds");
+    },
   // delete a saved book from our database
   deleteSound: function(id) {
     return axios.delete("/api/sounds/delete/" + id);

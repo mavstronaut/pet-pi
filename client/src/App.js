@@ -4,7 +4,7 @@ import Jumbotron from "./components/Jumbotron";
 import NavBar from "./components/Nav";
 import Books from "./pages/Books";
 
-
+// might consider moving switch to route to a separate login page, else its going on saved
 
 function App() {
   return (
