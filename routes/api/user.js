@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const userController = require("../../controllers/userController");
+const passport = require('passport');
 
 // Signup
 router.route("/signup")
