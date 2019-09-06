@@ -11,14 +11,14 @@ function SearchCard(props) {
                         <div className="form-group">
 
                             <label >Title</label>
-                            <input type="text" className="form-control" value={props.value} onChange={props.onChange} placeholder="Short name for sound effect"/>
+                            <input type="text" className="form-control" name="title" value={props.value.title} onChange={props.onChange} placeholder="Short name for sound effect"/>
                         
                             <label >Sound</label>
-                            <input type="text" className="form-control" value={props.value} onChange={props.onChange} placeholder="Example: http://youtube.com/?= Youtube Link" required/>
+                            <input type="text" className="form-control" name="link" value={props.value.link} onChange={props.onChange} placeholder="Example: http://youtube.com/?= Youtube Link" required/>
                         
                             
                             <label >Sound Purpose:</label>
-                            <select class="form-control" id="sound-type">
+                            <select name="type" value={props.value.type} class="form-control" id="sound-type">
                                 <option value="alert">Alert</option>
                                 <option value="distract">Distract</option>
                                 <option value="good">Good Boy</option>
