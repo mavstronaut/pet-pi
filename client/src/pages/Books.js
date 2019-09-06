@@ -25,11 +25,12 @@ class Books extends Component {
     state = {
         results: [],
         savedSounds: [],
-        soundSearch: "",
+        soundSearch: {title: "", link: "", type: ""},
         link: "",
         localSound: 0,
+        title: ""
         // login: [],
-        // videoState: 0
+        // videoState: 
     };
 
     componentDidMount (){
@@ -57,6 +58,7 @@ class Books extends Component {
         console.log(saveSound);
 
         let soundData = {
+            title: saveSound.title,
             link: saveSound.Link,
             type: saveSound.type,
             key: saveSound.id
@@ -85,7 +87,7 @@ class Books extends Component {
 
         let soundData = {
             title: saveSound.title,
-            link: saveSound.Link,
+            link: saveSound.link,
             type: saveSound.type,
             key: saveSound.id
         }
@@ -102,6 +104,7 @@ class Books extends Component {
                     .catch(err => console.log(err));
             }
         } else {
+            // this try / catch won't register. fix with promise .catch 
             try {
                 API.saveSound(soundData)
                     .then(API.getSavedSounds()
@@ -133,9 +136,10 @@ class Books extends Component {
     handleInputChange = event => {
 
         const value = event.target.value;
-
+        let currentSoundSearch = this.state.soundSearch;
+        currentSoundSearch[event.target.name] = value;
         this.setState({
-            soundSearch: value
+            soundSearch: currentSoundSearch
         })
     }
 
