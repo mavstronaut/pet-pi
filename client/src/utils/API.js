@@ -10,12 +10,12 @@ export default {
   // display the saved sounds from our database
   // not working
   getSavedSounds: function() {
-    try {
+    // try {
       return axios.get("/api/sounds/saved");
-    }
-    catch {
-      return axios.get("./hardSounds");
-    }
+    // }
+    // catch {
+    //   return axios.get("./hardSounds");
+    // }
   },
     // display the hard coded saved sounds from our database
     getHardSounds: function() {

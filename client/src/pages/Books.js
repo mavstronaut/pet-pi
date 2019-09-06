@@ -9,7 +9,7 @@ import API from "../utils/API";
 // import Login from "../components/LoginCard";
 
 // this is for youtube
-import audioDefault from "../utils/hardSounds";
+// import audioDefault from "../../../models/hardSounds";
 //import VideoPlayer from "../components/VideoPlayer";
 
 // hard coded sounds
@@ -41,13 +41,14 @@ class Books extends Component {
                         savedSounds: res.data
                     })
 
-                }).catch(API.getHardSounds()
-                    .then(res => {
-                        this.setState({
-                            savedSounds: res.data
-                        })
                 })
-            )
+            //     .catch(API.getHardSounds()
+            //         .then(res => {
+            //             this.setState({
+            //                 savedSounds: res.data
+            //             })
+            //     })
+            // )
     }
 
     handleSearch = event => {
@@ -105,7 +106,7 @@ class Books extends Component {
             }
         } else {
             // this try / catch won't register. fix with promise .catch 
-            try {
+            // try {
                 API.saveSound(soundData)
                     .then(API.getSavedSounds()
                     .then(res => {
@@ -116,15 +117,15 @@ class Books extends Component {
                         console.log("Length", this.state.savedSounds.length)
                     })
                 )
-            } 
-            catch {
-                API.getHardSounds()
-                    .then(res => {
-                        this.setState({
-                            savedSounds: res.data
-                        })
-                    })
-            }
+            // } 
+            // catch {
+            //     API.getHardSounds()
+            //         .then(res => {
+            //             this.setState({
+            //                 savedSounds: res.data
+            //             })
+            //         })
+            // }
         }
 
         
@@ -155,7 +156,7 @@ class Books extends Component {
             key: saveSound.id
         }
 
-        try {
+        // try {
         API.saveSound(soundData)
             .then(API.getSavedSounds()
                 .then(res => {
@@ -166,15 +167,15 @@ class Books extends Component {
                     console.log("Length", this.state.savedSounds.length)
                 })
             )
-        } 
-        catch {
-            API.getHardSounds()
-                .then(res => {
-                    this.setState({
-                        savedSounds: res.data
-                    })
-                })
-        }
+        // } 
+        // catch {
+        //     API.getHardSounds()
+        //         .then(res => {
+        //             this.setState({
+        //                 savedSounds: res.data
+        //             })
+        //         })
+        // }
     }
 
     handleSearchSave = event => {
@@ -190,7 +191,7 @@ class Books extends Component {
             key: saveSound.id
         }
 
-        try {
+        // try {
         API.saveSound(soundData.key, soundData)
             .then(API.getSavedSounds()
                 .then(res => {
@@ -201,15 +202,15 @@ class Books extends Component {
                     console.log("Length", this.state.savedSounds.length)
                 })
             )
-        } 
-        catch {
-            API.getHardSounds()
-                .then(res => {
-                    this.setState({
-                        savedSounds: res.data
-                    })
-                })
-        }
+        // } 
+        // catch {
+        //     API.getHardSounds()
+        //         .then(res => {
+        //             this.setState({
+        //                 savedSounds: res.data
+        //             })
+        //         })
+        // }
     }    
 
     handleDelete = event => {
@@ -348,21 +349,22 @@ class Books extends Component {
                                     />
                                 )
                             })
-                        ) : (
-                            audioDefault.state.savedSounds.map((sound, i) =>{// function to hold 
-                                return (
-                                    <BookItemCard
-                                        key={sound._id}
-                                        title={sound.title}
-                                        href={sound.link}
-                                        thumbnail={(sound.thumbnail) ? (sound.thumbnail) : ("https://i.imgur.com/R3q09Me.png")}
-                                        play={this.handlePlay}
-                                        delete={this.handleDelete}
-                                        index={i}
-                                    />
+                        ) : ( 
+                             <h3> nothing to display </h3>
+                            // audioDefault.state.savedSounds.map((sound, i) =>{// function to hold 
+                                // return (
+                                //     <BookItemCard
+                                //         key={sound._id}
+                                //         title={sound.title}
+                                //         href={sound.link}
+                                //         thumbnail={(sound.thumbnail) ? (sound.thumbnail) : ("https://i.imgur.com/R3q09Me.png")}
+                                //         play={this.handlePlay}
+                                //         delete={this.handleDelete}
+                                //         index={i}
+                                //     />
 
-                                    )
-                                })
+                                //     )
+                                // })
 
 
                                 
