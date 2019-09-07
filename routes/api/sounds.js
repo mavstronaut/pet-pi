@@ -1,14 +1,14 @@
 const router = require("express").Router();
 const soundsController = require("../../controllers/soundsController");
 const playController = require("../../controllers/playController");
-const audioDefault = require("../../models/hardSounds");
+const audioDefault = require("./hardSounds");
 
 // Landing page call
 router.route("/:id")
 	.post(soundsController.create);
 
 // Saved page calls
-router.route("/saved", function (req, res) {
+router.route("/hardSounds", function (req, res) {
 	res.send(audioDefault);
 })
 
@@ -19,7 +19,7 @@ router.route("/saved", function (req, res) {
 router.route("/delete/:id")
 	  .delete(soundsController.remove);
 	  
-// play the song
+// play the song locally
  router.route("/saved/:id")
 	.post(playController.playSong);
 	

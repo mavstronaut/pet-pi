@@ -10,7 +10,7 @@ import Login from "../components/LoginCard";
 
 // this is for youtube
 import VideoPlayer from "../components/VideoPlayer";
-import { Video } from "simple-youtube-api/src/YouTube";
+// import { Video } from "simple-youtube-api/src/YouTube";
 
 // hard coded sounds
 // import hardSounds from "../utils/hardSounds"
@@ -30,7 +30,7 @@ class Books extends Component {
         localSound: 0,
         loginInfo: {user: "", pass: ""},
         hardSound: [],
-        playVideo: ""
+        playVideo: "https://www.youtube.com/embed?v=8dENYJbN1z4"
     };
 
     componentDidMount (){
@@ -41,11 +41,13 @@ class Books extends Component {
                 })
             })
 
-        if (playVideo === null) {
-            this.setState({
-                playVideo: "https://www.youtube.com/watch?v=8dENYJbN1z4"
-            })
-        }
+        // var currentVideo = this.state.playVideo;
+
+        // if (currentVideo === "") {
+        //     this.setState({
+        //         playVideo: "https://www.youtube.com/watch?v=8dENYJbN1z4"
+        //     })
+        // }
 
         API.getSavedSounds()
                 .then(res => {
@@ -349,10 +351,13 @@ class Books extends Component {
         const videoURL = this.state.playVideo;
         console.log(videoURL);
 
+        // checkEmbed with RegEx to change from watch to embed
+
 
         this.setState({
             playVideo: this.href
         })
+
         // console.log("response", res.data.items)
         
 
@@ -458,7 +463,7 @@ class Books extends Component {
                         /> 
 
                     <VideoPlayer
-                        value={this.state.playVideo}
+                        link={this.state.playVideo}
                         />
 
                     </div>
