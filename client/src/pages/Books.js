@@ -26,9 +26,9 @@ class Books extends Component {
         results: [],
         savedSounds: [],
         soundSearch: {title: "", link: "", type: ""},
-        link: "",
+        link: {link: "", title: "", type: ""},
         localSound: 0,
-        title: ""
+        login: {user: "", pass: ""}
         // login: [],
         // videoState: 
     };
@@ -184,9 +184,9 @@ class Books extends Component {
         console.log(saveSound);
 
         const soundData = {
-            title: saveSound.volumeInfo.title,
-            link: saveSound.volumeInfo.previewLink,
-            thumbnail: saveSound.volumeInfo.imageLinks.thumbnail,
+            title: saveSound.title,
+            link: saveSound.link,
+            thumbnail: saveSound.imageLinks.thumbnail,
             type: saveSound.type,
             key: saveSound.id
         }
@@ -304,8 +304,8 @@ class Books extends Component {
                                     return (
                                         <BookItemCard
                                             key={sound.id}
-                                            href={sound.volumeInfo.previewLink}
-                                            thumbnail={(sound.volumeInfo.imageLinks) ? (sound.volumeInfo.imageLinks.thumbnail) : ("https://i.imgur.com/R3q09Me.png")}
+                                            href={sound.link}
+                                            thumbnail={(sound.imageLinks) ? (sound.imageLinks.thumbnail) : ("https://i.imgur.com/R3q09Me.png")}
                                             save={this.handleSearchSave}
                                             play={this.handlePlay}  
                                             index={i}
