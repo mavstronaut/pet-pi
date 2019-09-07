@@ -8,9 +8,12 @@ router.route("/:id")
 	.post(soundsController.create);
 
 // Saved page calls
-router.route("/hardSounds", function (req, res) {
-	res.send(audioDefault);
-})
+// router.route("/hardSounds", function (req, res) {
+// 	res.send(audioDefault);
+// })
+router.route("/hardSounds")
+	.get( (req, res) => res.send(audioDefault));
+
 
 // router.route("/saved")
 	  // .get(soundsController.findAllSaved); // commented out to use hard coded sounds

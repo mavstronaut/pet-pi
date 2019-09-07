@@ -30,7 +30,7 @@ class Books extends Component {
         localSound: 0,
         loginInfo: {user: "", pass: ""},
         hardSound: [],
-        playVideo: "https://www.youtube.com/embed?v=8dENYJbN1z4"
+        playVideo: "https://www.youtube.com/embed/8dENYJbN1z4"
     };
 
     componentDidMount (){
@@ -49,13 +49,13 @@ class Books extends Component {
         //     })
         // }
 
-        API.getSavedSounds()
-                .then(res => {
-                    this.setState({
-                        savedSounds: res.data
-                    })
+        // API.getSavedSounds()
+        //         .then(res => {
+        //             this.setState({
+        //                 savedSounds: res.data
+        //             })
 
-                })
+        //         })
             //     .catch(API.getHardSounds()
             //         .then(res => {
             //             this.setState({
