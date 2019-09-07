@@ -38,7 +38,7 @@ export default {
 
     playSound: function(clicked) {
       return axios.post("/api/sounds/" + clicked);
-    }
+    },
 
   // play sound, send link from the button click to the controllers/play.js
   /* playSound: function(soundLink) {
@@ -46,6 +46,10 @@ export default {
   } */
 
   // user api routes
+    getLogin: function(login) {
+      return axios.post("api/user" + login);
+    }
+
 
 
   // future options to add to backend from here for the node-media-stream of video

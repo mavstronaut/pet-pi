@@ -153,6 +153,62 @@ class Books extends Component {
         })
     }
 
+    
+    handleSave = event => {
+        // saveSound needs to come from the form that was submitted from SearchCard
+        const saveSound = this.state.form;
+        console.log(saveSound);
+
+        const soundData = {
+            title: saveSound.title,
+            link: saveSound.link,
+            type: saveSound.type,
+            key: saveSound.id
+        }
+
+        // try {
+        API.saveSound(soundData)
+            .then(API.getSavedSounds()
+                .then(res => {
+                    this.setState({
+                        savedSounds: res.data
+                    })
+                    console.log("In state", this.state.savedSounds)
+                    console.log("Length", this.state.savedSounds.length)
+                })
+            )
+        // } 
+        // catch {
+        //     API.getHardSounds()
+        //         .then(res => {
+        //             this.setState({
+        //                 savedSounds: res.data
+        //             })
+        //         })
+        // }
+    }
+
+    handleSearchSave = event => {
+        const login = this.state.login;
+        console.log(login);
+
+        const login = {
+            user: login.user,
+            pass: login.pass,
+        }
+
+        API.login(login)
+            .then(API.getLogin()
+                .then(res => {
+                    this.setState({
+                        login: res.data
+                    })
+                    
+                })
+            )
+
+    }    
+
 
     handleSave = event => {
         // saveSound needs to come from the form that was submitted from SearchCard
