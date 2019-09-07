@@ -11,10 +11,10 @@ function LoginCard(props) {
                     
                         <div className="form-group">
 
-                            <label >Title</label>
+                            <label >Username:</label>
                             <input type="text" className="form-control" name="user" value={props.value} onChange={props.onChange} placeholder="email" required/>
                         
-                            <label >Sound</label>
+                            <label >Password:</label>
                             <input type="text" className="form-control" name="pass" value={props.value} onChange={props.onChange} placeholder="password" required/>
                             
                         </div>

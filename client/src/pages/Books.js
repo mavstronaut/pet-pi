@@ -6,7 +6,7 @@ import SaveCard from "../components/SaveResult";
 import API from "../utils/API";
 
 // this is for login
-// import Login from "../components/LoginCard";
+import Login from "../components/LoginCard";
 
 // this is for youtube
 // import audioDefault from "../../../models/hardSounds";
@@ -28,8 +28,7 @@ class Books extends Component {
         soundSearch: {title: "", link: "", type: ""},
         link: {link: "", title: "", type: ""},
         localSound: 0,
-        login: {user: "", pass: ""}
-        // login: [],
+        loginInfo: {user: "", pass: ""}
         // videoState: 
     };
 
@@ -146,10 +145,10 @@ class Books extends Component {
     handleLoginChange = event => {
 
         const value = event.target.value;
-        let currentLogin = this.state.login;
+        let currentLogin = this.state.loginInfo;
         currentLogin[event.target.name] = value;
         this.setState({
-            login: currentLogin
+            loginInfo: currentLogin
         })
     }
 
@@ -189,19 +188,19 @@ class Books extends Component {
     }
 
     handleSearchSave = event => {
-        const login = this.state.login;
+        const login = this.state.loginInfo;
         console.log(login);
 
         const loginField = {
-            user: loginField.user,
-            pass: loginField.pass,
+            user: login.user,
+            pass: login.pass,
         }
 
-        API.login(loginField)
+        API.getLogin(loginField)
             .then(API.getLogin()
                 .then(res => {
                     this.setState({
-                        login: res.data
+                        loginInfo: res.data
                     })
                     
                 })
@@ -383,7 +382,6 @@ class Books extends Component {
                                 )}
                         </SearchResult>
 
-                                
                         
                         
                     </div>
@@ -432,7 +430,7 @@ class Books extends Component {
                     </SaveCard>
 
                     <Login 
-                        value={this.state.login}
+                        value={this.state.loginInfo}
                         onChange={this.handleLoginChange}
                         onClick={this.handleLogin}
                         /> 
