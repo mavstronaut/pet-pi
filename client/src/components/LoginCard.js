@@ -12,10 +12,10 @@ function LoginCard(props) {
                         <div className="form-group">
 
                             <label >Title</label>
-                            <input type="text" className="form-control" value={props.value} onChange={props.onChange} placeholder="email" required/>
+                            <input type="text" className="form-control" name="user" value={props.value} onChange={props.onChange} placeholder="email" required/>
                         
                             <label >Sound</label>
-                            <input type="text" className="form-control" value={props.value} onChange={props.onChange} placeholder="password" required/>
+                            <input type="text" className="form-control" name="pass" value={props.value} onChange={props.onChange} placeholder="password" required/>
                             
                         </div>
                         {/* <button className="btn btn-sm float-right btn-info" type="submit" >Login to Mongo</button>  */}

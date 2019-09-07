@@ -192,12 +192,12 @@ class Books extends Component {
         const login = this.state.login;
         console.log(login);
 
-        const login = {
-            user: login.user,
-            pass: login.pass,
+        const loginField = {
+            user: loginField.user,
+            pass: loginField.pass,
         }
 
-        API.login(login)
+        API.login(loginField)
             .then(API.getLogin()
                 .then(res => {
                     this.setState({
