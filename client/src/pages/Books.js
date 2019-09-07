@@ -6,7 +6,7 @@ import SaveCard from "../components/SaveResult";
 import API from "../utils/API";
 
 // this is for login
-// import Login from "../components/LoginCard";
+import Login from "../components/LoginCard";
 
 // this is for youtube
 // import audioDefault from "../../../models/hardSounds";
@@ -26,10 +26,9 @@ class Books extends Component {
         results: [],
         savedSounds: [],
         soundSearch: {title: "", link: "", type: ""},
-        link: "",
+        link: {link: "", title: "", type: ""},
         localSound: 0,
-        title: ""
-        // login: [],
+        loginInfo: {user: "", pass: ""}
         // videoState: 
     };
 
@@ -60,7 +59,7 @@ class Books extends Component {
 
         let soundData = {
             title: saveSound.title,
-            link: saveSound.Link,
+            link: saveSound.link,
             type: saveSound.type,
             key: saveSound.id
         }
@@ -133,7 +132,6 @@ class Books extends Component {
         
     }
 
-    // this handles every form field at the same time lol. need to create one for each box
     handleInputChange = event => {
 
         const value = event.target.value;
@@ -144,6 +142,17 @@ class Books extends Component {
         })
     }
 
+    handleLoginChange = event => {
+
+        const value = event.target.value;
+        let currentLogin = this.state.loginInfo;
+        currentLogin[event.target.name] = value;
+        this.setState({
+            loginInfo: currentLogin
+        })
+    }
+
+    
     handleSave = event => {
         // saveSound needs to come from the form that was submitted from SearchCard
         const saveSound = this.state.form;
@@ -151,7 +160,63 @@ class Books extends Component {
 
         const soundData = {
             title: saveSound.title,
-            link: saveSound.Link,
+            link: saveSound.link,
+            type: saveSound.type,
+            key: saveSound.id
+        }
+
+        // try {
+        API.saveSound(soundData)
+            .then(API.getSavedSounds()
+                .then(res => {
+                    this.setState({
+                        savedSounds: res.data
+                    })
+                    console.log("In state", this.state.savedSounds)
+                    console.log("Length", this.state.savedSounds.length)
+                })
+            )
+        // } 
+        // catch {
+        //     API.getHardSounds()
+        //         .then(res => {
+        //             this.setState({
+        //                 savedSounds: res.data
+        //             })
+        //         })
+        // }
+    }
+
+    handleSearchSave = event => {
+        const login = this.state.loginInfo;
+        console.log(login);
+
+        const loginField = {
+            user: login.user,
+            pass: login.pass,
+        }
+
+        API.getLogin(loginField)
+            .then(API.getLogin()
+                .then(res => {
+                    this.setState({
+                        loginInfo: res.data
+                    })
+                    
+                })
+            )
+
+    }    
+
+
+    handleSave = event => {
+        // saveSound needs to come from the form that was submitted from SearchCard
+        const saveSound = this.state.form;
+        console.log(saveSound);
+
+        const soundData = {
+            title: saveSound.title,
+            link: saveSound.link,
             type: saveSound.type,
             key: saveSound.id
         }
@@ -184,9 +249,9 @@ class Books extends Component {
         console.log(saveSound);
 
         const soundData = {
-            title: saveSound.volumeInfo.title,
-            link: saveSound.volumeInfo.previewLink,
-            thumbnail: saveSound.volumeInfo.imageLinks.thumbnail,
+            title: saveSound.title,
+            link: saveSound.link,
+            thumbnail: saveSound.thumbnail,
             type: saveSound.type,
             key: saveSound.id
         }
@@ -276,7 +341,7 @@ class Books extends Component {
             API.playVideo(this.state.link)
         } else {
             // send the url from the object to the backend playNodeMediaStream
-            API.playLocalVideo(homeLink)
+            API.playLocalVideo(homelink)
         }
     }  
     */
@@ -304,8 +369,8 @@ class Books extends Component {
                                     return (
                                         <BookItemCard
                                             key={sound.id}
-                                            href={sound.volumeInfo.previewLink}
-                                            thumbnail={(sound.volumeInfo.imageLinks) ? (sound.volumeInfo.imageLinks.thumbnail) : ("https://i.imgur.com/R3q09Me.png")}
+                                            href={sound.link}
+                                            thumbnail={(sound.thumbnail) ? (sound.thumbnail) : ("https://i.imgur.com/R3q09Me.png")}
                                             save={this.handleSearchSave}
                                             play={this.handlePlay}  
                                             index={i}
@@ -317,19 +382,12 @@ class Books extends Component {
                                 )}
                         </SearchResult>
 
-                                
                         
-                        {/* <VideoPlayer
-                            link={this.state.link=sound.link}
-                        /> */}
+                        
                     </div>
                     :
-                    // we might move this to its own card entirely
-                        /* <Login 
-                            value={this.state.email}
-                            onChange={this.handleInputChange}
-                            onClick={this.handleLogin}
-                        /> */
+                    <div>
+                    
                 
                     <SaveCard
                         value={this.state.localSound}
@@ -370,18 +428,19 @@ class Books extends Component {
                                 
                             )}
                     </SaveCard>
-                    
+
+                    <Login 
+                        value={this.state.loginInfo}
+                        onChange={this.handleLoginChange}
+                        onClick={this.handleLogin}
+                        /> 
+                    </div>
                     
                 }
                     
             </div>
 
-                    // commented out component to be used to play the audio of a song or the video stream
-                    // <VideoPlayer
-                    //     link={this.state.link=sound.link}
-                    //     value={this.state.videoState}
-                    //     action={this.playVideo}
-                    // />
+                   
                     
         )
     }

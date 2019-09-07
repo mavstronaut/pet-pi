@@ -7,7 +7,7 @@ function Nav() {
       <a className="nav-link text-info" href="/">
         <h3>pet Pi</h3>
       </a>
-      <a className="nav-link mt-2 text-info" href="/">Login</a>
+      <a className="nav-link mt-2 text-info" href="/saved">Login</a>
       <a className="nav-link mt-2 text-info" href="/saved">Sounds</a>
     </nav>
   );
