@@ -319,17 +319,11 @@ class Books extends Component {
 
                                 
                         
-                        {/* <VideoPlayer
-                            link={this.state.link=sound.link}
-                        /> */}
+                        
                     </div>
                     :
-                    // we might move this to its own card entirely
-                        /* <Login 
-                            value={this.state.email}
-                            onChange={this.handleInputChange}
-                            onClick={this.handleLogin}
-                        /> */
+                    <div>
+                    
                 
                     <SaveCard
                         value={this.state.localSound}
@@ -370,18 +364,19 @@ class Books extends Component {
                                 
                             )}
                     </SaveCard>
-                    
+
+                    <Login 
+                        value={this.state.login}
+                        onChange={this.handleLoginChange}
+                        onClick={this.handleLogin}
+                        /> 
+                    </div>
                     
                 }
                     
             </div>
 
-                    // commented out component to be used to play the audio of a song or the video stream
-                    // <VideoPlayer
-                    //     link={this.state.link=sound.link}
-                    //     value={this.state.videoState}
-                    //     action={this.playVideo}
-                    // />
+                   
                     
         )
     }
