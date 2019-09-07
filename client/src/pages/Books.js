@@ -133,7 +133,6 @@ class Books extends Component {
         
     }
 
-    // this handles every form field at the same time lol. need to create one for each box
     handleInputChange = event => {
 
         const value = event.target.value;
@@ -143,6 +142,17 @@ class Books extends Component {
             soundSearch: currentSoundSearch
         })
     }
+
+    handleLoginChange = event => {
+
+        const value = event.target.value;
+        let currentLogin = this.state.login;
+        currentLogin[event.target.name] = value;
+        this.setState({
+            login: currentLogin
+        })
+    }
+
 
     handleSave = event => {
         // saveSound needs to come from the form that was submitted from SearchCard
