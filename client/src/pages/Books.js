@@ -9,8 +9,8 @@ import API from "../utils/API";
 import Login from "../components/LoginCard";
 
 // this is for youtube
-// import audioDefault from "../../../models/hardSounds";
-//import VideoPlayer from "../components/VideoPlayer";
+import VideoPlayer from "../components/VideoPlayer";
+import { Video } from "simple-youtube-api/src/YouTube";
 
 // hard coded sounds
 // import hardSounds from "../utils/hardSounds"
@@ -28,11 +28,24 @@ class Books extends Component {
         soundSearch: {title: "", link: "", type: ""},
         link: {link: "", title: "", type: ""},
         localSound: 0,
-        loginInfo: {user: "", pass: ""}
-        // videoState: 
+        loginInfo: {user: "", pass: ""},
+        hardSound: [],
+        playVideo: ""
     };
 
     componentDidMount (){
+        API.getHardSounds()
+            .then(res => {
+                this.setState({
+                    hardSound: res.data
+                })
+            })
+
+        if (playVideo === null) {
+            this.setState({
+                playVideo: "https://www.youtube.com/watch?v=8dENYJbN1z4"
+            })
+        }
 
         API.getSavedSounds()
                 .then(res => {
@@ -44,7 +57,6 @@ class Books extends Component {
             //     .catch(API.getHardSounds()
             //         .then(res => {
             //             this.setState({
-            //                 savedSounds: res.data
             //             })
             //     })
             // )
@@ -317,34 +329,44 @@ class Books extends Component {
         }
     }
 
-    /*
-    handleVideoPlayer = event => {
-        if (this.state.videoState === 0) {
-            this.setState({
-                videoState: "player"
-            })
-            console.log(this.state.videoState);
-        } else {
-            this.setState({
-                videoState: 0
-            })
-            console.log(this.state.videoState);
-        }
-    }
+    
+    // handleVideoPlayer = event => {
+    //     if (this.state.videoState === 0) {
+    //         this.setState({
+    //             videoState: "player"
+    //         })
+    //         console.log(this.state.videoState);
+    //     } else {
+    //         this.setState({
+    //             videoState: 0
+    //         })
+    //         console.log(this.state.videoState);
+    //     }
+    // } 
 
     handleVideoPlay = event => {
         
-        if (this.state.videoState === 1) {
+        const videoURL = this.state.playVideo;
+        console.log(videoURL);
+
+
+        this.setState({
+            playVideo: this.href
+        })
+        // console.log("response", res.data.items)
+        
+
+        // if (this.state.videoState === 1) {
             // logic to play sound locally in window using embedded player    
 
 
-            API.playVideo(this.state.link)
-        } else {
+        //     API.playVideo(this.state.link)
+        // } else {
             // send the url from the object to the backend playNodeMediaStream
-            API.playLocalVideo(homelink)
-        }
+        //     API.playLocalVideo(homelink)
+        // }
     }  
-    */
+    
 
 
 
@@ -392,16 +414,16 @@ class Books extends Component {
                     <SaveCard
                         value={this.state.localSound}
                         onClick={this.handleLocalToggle}>
-                        {this.state.savedSounds.length ? (
+                        {this.state.hardSound.length ? (
 
-                            this.state.savedSounds.map((sound, i) => {
+                            this.state.hardSound.map((sound, i) => {
                                 return (
                                     <BookItemCard
-                                        key={sound._id}
+                                        // key={sound._id}
                                         title={sound.title}
                                         href={sound.link}
                                         thumbnail={(sound.thumbnail) ? (sound.thumbnail) : ("https://i.imgur.com/R3q09Me.png")}   
-                                        play={this.handlePlay}                                     
+                                        play={this.handleVideoPlay}                                     
                                         delete={this.handleDelete}
                                         index={i}
                                     />
@@ -434,6 +456,11 @@ class Books extends Component {
                         onChange={this.handleLoginChange}
                         onClick={this.handleLogin}
                         /> 
+
+                    <VideoPlayer
+                        value={this.state.playVideo}
+                        />
+
                     </div>
                     
                 }

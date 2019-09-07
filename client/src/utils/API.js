@@ -19,7 +19,7 @@ export default {
   },
     // display the hard coded saved sounds from our database
     getHardSounds: function() {
-      return axios.get("./hardSounds");
+      return axios.get("/api/sounds/saved");
     },
   // delete a saved book from our database
   deleteSound: function(id) {
