@@ -60,7 +60,7 @@ class Books extends Component {
 
         let soundData = {
             title: saveSound.title,
-            link: saveSound.Link,
+            link: saveSound.link,
             type: saveSound.type,
             key: saveSound.id
         }
@@ -151,7 +151,7 @@ class Books extends Component {
 
         const soundData = {
             title: saveSound.title,
-            link: saveSound.Link,
+            link: saveSound.link,
             type: saveSound.type,
             key: saveSound.id
         }
@@ -186,7 +186,7 @@ class Books extends Component {
         const soundData = {
             title: saveSound.title,
             link: saveSound.link,
-            thumbnail: saveSound.imageLinks.thumbnail,
+            thumbnail: saveSound.thumbnail,
             type: saveSound.type,
             key: saveSound.id
         }
@@ -276,7 +276,7 @@ class Books extends Component {
             API.playVideo(this.state.link)
         } else {
             // send the url from the object to the backend playNodeMediaStream
-            API.playLocalVideo(homeLink)
+            API.playLocalVideo(homelink)
         }
     }  
     */
@@ -305,7 +305,7 @@ class Books extends Component {
                                         <BookItemCard
                                             key={sound.id}
                                             href={sound.link}
-                                            thumbnail={(sound.imageLinks) ? (sound.imageLinks.thumbnail) : ("https://i.imgur.com/R3q09Me.png")}
+                                            thumbnail={(sound.thumbnail) ? (sound.thumbnail) : ("https://i.imgur.com/R3q09Me.png")}
                                             save={this.handleSearchSave}
                                             play={this.handlePlay}  
                                             index={i}
