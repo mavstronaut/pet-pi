@@ -43,29 +43,49 @@ mongoConnect(MONGODB_URI);
 
 
 // adding passport init
-var SECRET = process.env.SECRET;
+// var SECRET = process.env.SECRET;
 
-app.use(
-  session({
-    secret: SECRET,
-    resave: true,
-    saveUninitialized: true
-  })
-);
-app.use(passport.initialize());
-configureJWTStrategy();
-configGoogleStrategy();
+// app.use(
+//   session({
+//     secret: SECRET,
+//     resave: true,
+//     saveUninitialized: true
+//   })
+// );
+// app.use(passport.initialize());
+// configureJWTStrategy();
+// configGoogleStrategy();
 // save user into session
 // req.session.user = {userId}
-passport.serializeUser((user, done) => {
-  done(null, user._id);
-});
+// passport.serializeUser((user, done) => {
+//   done(null, user._id);
+// });
 // extract the userId from session
-passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
-    done(null, user);
-  });
-});
+// passport.deserializeUser((id, done) => {
+//   User.findById(id, (err, user) => {
+//     done(null, user);
+//   });
+// });
+
+
+
+///AUTH / Security 
+const session  = require('express-session');
+const passport = require('passport');
+const flash    = require('connect-flash');
+require('./passport')(passport); 
+app.use(session({
+	secret: process.env.session_secret,
+	resave: true,
+	saveUninitialized: true
+ } )); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
+
+
+//ROUTES
+require('./routes/passport.js')(app, passport);
 
 // Start the API server
 app.listen(PORT, function() {
